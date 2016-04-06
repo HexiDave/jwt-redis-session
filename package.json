@@ -1,14 +1,8 @@
 {
-  "name": "jwt-redis-session",
+  "name": "stark-jwt-redis-session",
   "description": "JSON Web Token session middleware backed by Redis",
   "version": "1.0.3",
-  "authors": "Azuqua",
-  "contributors": [
-    {
-      "name": "Alec Embke",
-      "url": "alec@azuqua.com"
-    }
-  ],
+  "authors": "marcstark",
   "licenses": [
     {
       "type": "MIT",
@@ -17,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/azuqua/jwt-redis-session"
+    "url": "https://github.com/azuqua/jwt-redis-session.git"
   },
   "dependencies": {
     "jsonwebtoken": "^5.5.4",
@@ -36,7 +30,9 @@
     "restjs": "azuqua/restjs"
   },
   "keywords": [
-    "azuqua",
+    "marc",
+    "stark",
+    "marcstark",
     "jwt",
     "token",
     "redis",
