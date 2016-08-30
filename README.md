@@ -28,6 +28,7 @@ This module supports a few initialization parameters that can be used to support
 * **algorithm** - The hashing algorithm to use, the default is "HS256" (SHA-256).
 * **client** - The redis client to use to perform redis commands.
 * **maxAge** - The maximum age (in seconds) of a session. 
+* **getToken** - An optional function to further customize finding the JWT session object. The default is compatible with Express. Takes: `(req, requestHeader, requestArg)`
 
 ```
 var JWTRedisSession = require("jwt-redis-session"),

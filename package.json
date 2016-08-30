@@ -1,8 +1,8 @@
 {
-  "name": "stark-jwt-redis-session",
+  "name": "hexidave-jwt-redis-session",
   "description": "JSON Web Token session middleware backed by Redis",
-  "version": "1.0.4",
-  "authors": "marcstark",
+  "version": "1.0.5",
+  "authors": "HexiDave <hexidave@gmail.com>",
   "licenses": [
     {
       "type": "MIT",
@@ -30,9 +30,6 @@
     "restjs": "azuqua/restjs"
   },
   "keywords": [
-    "marc",
-    "stark",
-    "marcstark",
     "jwt",
     "token",
     "redis",
