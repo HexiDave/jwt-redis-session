@@ -73,8 +73,10 @@ export default class SessionManager {
 				return next();
 			}
 
+			// Clears out non-claims data
+			const {jti, token: oldToken, ...claims} = sessionData;
 
-			session.put(decodedToken.jti, token, sessionData.claims);
+			session.put(decodedToken.jti, token, claims);
 			session.touch().then(() => next()).catch(next);
 		});
 	}
