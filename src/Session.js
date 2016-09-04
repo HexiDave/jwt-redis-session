@@ -36,22 +36,20 @@ export default class Session {
 
 		const token = jwt.sign(tokenComponents, secret, {algorithm});
 
-		this.sessionManager.client.setex(
-			Session.getKeyName(keyspace, jti),
-			maxAge,
-			JSON.stringify({
-				...tokenComponents,
-				token
-			}, err => {
-				if (err) {
-					throw err;
-				}
+		const cache = JSON.stringify({
+			...tokenComponents,
+			token
+		});
 
-				this.put(jti, token, claims);
+		this.sessionManager.client.setex(Session.getKeyName(keyspace, jti),	maxAge, cache, err => {
+			if (err) {
+				throw err;
+			}
 
-				return token;
-			})
-		)
+			this.put(jti, token, claims);
+
+			return token;
+		});
 	}
 
 	async touch() {
