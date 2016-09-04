@@ -13,6 +13,7 @@
 		"type": "git",
 		"url": "https://github.com/HexiDave/jwt-redis-session.git"
 	},
+	"main": "lib/index.js",
 	"scripts": {
 		"compile": "babel --plugins transform-runtime --presets es2015,stage-0 -d lib/ src/",
 		"prepublish": "npm run compile"
