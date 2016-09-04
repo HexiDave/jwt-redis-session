@@ -14,7 +14,7 @@ export default class SessionManager {
 
 	static authorizationHeaderTokenParser(req) {
 		const headerFunc = req.header || req.get;
-		const tokenBearer = headerFunc('authorization');
+		const tokenBearer = headerFunc.call(req, 'authorization');
 		if (!tokenBearer) {
 			return null;
 		} else {
