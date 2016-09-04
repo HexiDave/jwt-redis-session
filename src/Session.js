@@ -47,7 +47,7 @@ export default class Session {
 					throw err;
 				}
 
-				this.jti = jti;
+				this.put(jti, token, claims);
 
 				return token;
 			})
