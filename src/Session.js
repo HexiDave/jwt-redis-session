@@ -41,15 +41,17 @@ export default class Session {
 			token
 		});
 
-		this.sessionManager.client.setex(Session.getKeyName(keyspace, jti),	maxAge, cache, err => {
-			if (err) {
-				throw err;
-			}
+		return new Promise((resolve, reject) => {
+			this.sessionManager.client.setex(Session.getKeyName(keyspace, jti),	maxAge, cache, err => {
+				if (err) {
+					reject(err);
+				}
 
-			this.put(jti, token, claims);
+				this.put(jti, token, claims);
 
-			Promise.resolve(token);
-		});
+				resolve(token);
+			});
+		})
 	}
 
 	async touch() {
