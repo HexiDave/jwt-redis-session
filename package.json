@@ -1,7 +1,7 @@
 {
 	"name": "hexidave-jwt-redis-session",
 	"description": "JSON Web Token session middleware backed by Redis",
-	"version": "2.0.1",
+	"version": "2.0.0",
 	"authors": "HexiDave <hexidave@gmail.com>",
 	"licenses": [
 		{
@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"compile": "babel --plugins transform-runtime --presets es2015,stage-0 -d lib/ src/",
-		"install": "npm run compile"
+		"prepublish": "npm run compile"
 	},
 	"dependencies": {
 		"jsonwebtoken": "^5.7.0",
