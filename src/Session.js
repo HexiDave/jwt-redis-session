@@ -5,7 +5,7 @@ import uuid from 'node-uuid'
 export default class Session {
 	sessionManager = null;
 
-	id = '';
+	jti = '';
 	token = '';
 	claims = {};
 
@@ -15,6 +15,12 @@ export default class Session {
 
 	constructor(sessionManager) {
 		this.sessionManager = sessionManager;
+	}
+
+	getLocalKeyName() {
+		const {sessionManager, jti} = this;
+		const {keyspace} = sessionManager.options;
+		return Session.getKeyName(keyspace, jti);
 	}
 
 	put(jti, token, claims = {}) {
@@ -55,18 +61,36 @@ export default class Session {
 	}
 
 	async touch() {
-		if (!this.id) {
+		if (!this.jti) {
 			throw new Error('Invalid session ID');
 		}
 
-		const {keyspace, maxAge} = this.sessionManager.options;
+		const {maxAge} = this.sessionManager.options;
 
-		this.sessionManager.client.expire(Session.getKeyName(keyspace, this.jti), maxAge, err => {
-			if (err) {
-				throw err;
-			}
+		return new Promise((resolve, reject) => {
+			this.sessionManager.client.expire(this.getLocalKeyName(), maxAge, err => {
+				if (err) {
+					reject(err);
+				}
 
-			Promise.resolve();
+				resolve();
+			});
+		})
+	}
+
+	async destroy() {
+		if (!this.jti) {
+			throw new Error('Invalid session ID');
+		}
+
+		return new Promise((resolve, reject) => {
+			this.sessionManager.client.del(this.getLocalKeyName(), err => {
+				if (err) {
+					reject(err);
+				}
+
+				resolve();
+			})
 		})
 	}
 }
