@@ -48,7 +48,7 @@ export default class Session {
 
 			this.put(jti, token, claims);
 
-			return token;
+			Promise.resolve(token);
 		});
 	}
 
